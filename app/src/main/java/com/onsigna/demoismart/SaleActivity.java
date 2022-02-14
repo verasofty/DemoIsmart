@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -88,6 +89,8 @@ public class SaleActivity extends AppCompatActivity implements HALReaderCallback
         actions();
         parseIntentParameters();
         setServiceURL();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private void setServiceURL() {
@@ -486,8 +489,8 @@ public class SaleActivity extends AppCompatActivity implements HALReaderCallback
         try {
             super.onActivityResult(requestCode, resultCode, data);
 
-            if (requestCode == REQUEST_CODE_SIGNATURE  && resultCode  == RESULT_OK)
-                writeConsole(CODE_SUCESSFUL, "== Venta con firma autógrafa ==");
+            //if (requestCode == REQUEST_CODE_SIGNATURE  && resultCode  == RESULT_OK)
+                //writeConsole(CODE_SUCESSFUL, "== Venta con firma autógrafa ==");
 
         } catch (Exception ex) {
             Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();

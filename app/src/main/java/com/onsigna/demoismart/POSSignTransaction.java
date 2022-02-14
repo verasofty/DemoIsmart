@@ -3,7 +3,6 @@ package com.onsigna.demoismart;
 import static com.onsigna.demoismart.utils.POSSystem.*;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.device.sdk.BuildConfig;
@@ -14,7 +13,6 @@ import android.gesture.GestureOverlayView.OnGesturePerformedListener;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -33,7 +31,6 @@ import com.onsigna.readerismartlib.HALReaderIsmartImpl;
 import com.sf.connectors.ConnectorMngr;
 import com.sf.upos.reader.GenericReader;
 import com.sf.upos.reader.IHALReader;
-import com.sf.upos.reader.ReaderMngr;
 import com.sfmex.upos.reader.TransactionDataRequest;
 import com.sfmex.upos.reader.TransactionDataResult;
 
@@ -287,11 +284,6 @@ public class POSSignTransaction extends AppCompatActivity implements OnGesturePe
             if (transaction_type != null)
                 req.setTransactionType(transaction_type);
             req.setUser(m_user);
-
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(POSSignTransaction.this);
-
-            //IHALReader reader = ReaderMngr.getReader(preferences.getString(ReaderMngr.DEFAULT_READER, ReaderMngr.HW_DSPREAD_QPOS));
-            //((GenericReader) reader).getSwitchConnector().setContext(POSSignTransaction.this, m_user);
 
             IHALReader reader = new HALReaderIsmartImpl();
             ((GenericReader) reader).setSwitchConnector( ConnectorMngr.getConnectorByID(ConnectorMngr.REST_CONNECTOR) );
