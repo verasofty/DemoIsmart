@@ -236,7 +236,8 @@ public class SaleActivity extends AppCompatActivity implements HALReaderCallback
         btnSale.setOnClickListener(view ->{
             InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(etMonto.getWindowToken(), 0);
-            initConnectBT();
+            //initConnectBT();
+            startTransaction();
         });
     }
 
