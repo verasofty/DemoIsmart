@@ -29,6 +29,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.onsigna.demoismart.utils.Auxiliar;
+import com.onsigna.readerismartlib.HALReaderIsmartImpl;
+import com.sf.connectors.ConnectorMngr;
 import com.sf.upos.reader.GenericReader;
 import com.sf.upos.reader.IHALReader;
 import com.sf.upos.reader.ReaderMngr;
@@ -288,8 +290,11 @@ public class POSSignTransaction extends AppCompatActivity implements OnGesturePe
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(POSSignTransaction.this);
 
-            IHALReader reader = ReaderMngr.getReader(preferences.getString(ReaderMngr.DEFAULT_READER, ReaderMngr.HW_DSPREAD_QPOS));
-            ((GenericReader) reader).getSwitchConnector().setContext(POSSignTransaction.this, m_user);
+            //IHALReader reader = ReaderMngr.getReader(preferences.getString(ReaderMngr.DEFAULT_READER, ReaderMngr.HW_DSPREAD_QPOS));
+            //((GenericReader) reader).getSwitchConnector().setContext(POSSignTransaction.this, m_user);
+
+            IHALReader reader = new HALReaderIsmartImpl();
+            ((GenericReader) reader).setSwitchConnector( ConnectorMngr.getConnectorByID(ConnectorMngr.REST_CONNECTOR) );
 
             System.out.println("Base64 -> " + toBase64(m_bitMapSignature));
             return ((GenericReader) reader).getSwitchConnector().signTransaction(m_bitMapSignature, req);
