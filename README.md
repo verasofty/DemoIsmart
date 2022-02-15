@@ -4,9 +4,6 @@
 
 # KashPay Guía del programador
 
-- TOC
-{:toc}
-
 
 # Change List
 
