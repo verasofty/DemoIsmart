@@ -83,6 +83,31 @@ import com.sf.upos.reader.ReaderMngr;
         }
     }
 ```
+
+## Configuración URL y usuario
+
+Inicializar los endpoint y usuarios para la app demo, el String user_terminal deberá ser proporcionado
+
+```java
+
+AuthenticateData.applicationSecret = "qs4qa1ralmgb4cna";
+AuthenticateData.applicationKey = "8z00pj9qxh3vaaggo7lfyw2xkj3rv80c7o1u";
+AuthenticateData.applicationBundle = "test.api.service";
+
+...
+public static SharedPreferences sharedPreferences;
+
+private void setServiceURL() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sharedPreferences.edit().putString(ISwitchConnector.SHARED_PREFERENCES_URL, getResources().getString(R.string.DEFAULT_URL))
+                .apply();
+    }
+
+...
+
+private final String user_terminal = "user_terminal";
+
+```
 ## Leer una tarjeta
 
 Paso 1. Configurar un objeto de la clase **TransactionDataRequest**
