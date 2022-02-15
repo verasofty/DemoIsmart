@@ -78,7 +78,7 @@ public class SaleActivity extends AppCompatActivity implements HALReaderCallback
     private Button btnSale;
     private TextView tvData;
     private EditText etMonto;
-    private final String user_terminal = "amucss_comercio1@gmial.com";
+    private final String user_terminal = "test_mpos_sdbx16@gmail.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -488,9 +488,6 @@ public class SaleActivity extends AppCompatActivity implements HALReaderCallback
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
             super.onActivityResult(requestCode, resultCode, data);
-
-            //if (requestCode == REQUEST_CODE_SIGNATURE  && resultCode  == RESULT_OK)
-                //writeConsole(CODE_SUCESSFUL, "== Venta con firma autógrafa ==");
 
         } catch (Exception ex) {
             Toast.makeText(this, ex.toString(), Toast.LENGTH_SHORT).show();

@@ -29,8 +29,8 @@ android {
 
 dependencies {
 
-    implementation ('com.github.verasofty:readercore:v1.0.5')
-    implementation ('com.github.verasofty:ISmartEMVLibrary:v1.0.0')
+    implementation 'com.github.verasofty:readercore:v1.0.5'
+    implementation 'com.github.verasofty:ISmartEMVLibrary:v1.0.0'
     implementation 'com.github.verasofty:ReaderIsmart:v1.0.9'
     //implementation files('libs/platform_sdk_v4.0.0802.jar')
 
