@@ -39,7 +39,7 @@ Procedimiento
 Declarar el token de uso del lector en el archivo [gradle.properties](/gradle.properties) 
 
 ```java
-    kashPayToken=[Este valor será entregado por KashPay vía correo]
+    authToken=[Este valor será entregado por KashPay vía correo]
 ```
 
 Agregar el repositorio donde se encuentra el componente AAR de KashPay, esto debe realizarse en el archivo
@@ -47,14 +47,17 @@ Agregar el repositorio donde se encuentra el componente AAR de KashPay, esto deb
 
 ```java
         maven { url "https://jitpack.io"
-            credentials { username kashPayToken }
+            credentials { username authToken }
         }
 ```
 
 se deberá agregar la referencia en el archivo [build.gradle](/app/build.gradle) de la **aplicación**
 
 ```java
-   implementation 'com.github.verasofty:reader:v1.0.0'
+    implementation 'com.github.verasofty:readercore:v1.0.5'
+    implementation 'com.github.verasofty:ISmartEMVLibrary:v1.0.0'
+    implementation 'com.github.verasofty:ReaderIsmart:v1.0.9'
+    
 ```
 
 Estos serían los pasos de configuración que deben llevarse a cabo para el correcto funcionamiento del componente.
@@ -78,49 +81,12 @@ import com.sf.upos.reader.ReaderMngr;
     private void initReader() {
         if (reader == null) {
             Log.d(TAG, "reader ==> init---");
-            reader = ReaderMngr.getReader(ReaderMngr.HW_DSPREAD_QPOS);
+            reader = new HALReaderIsmartImpl();
+            ((GenericReader)readerSale).setSwitchConnector( ConnectorMngr.getConnectorByID(ConnectorMngr.REST_CONNECTOR) );
         }
     }
 ```
-
-## Conexión a un lector
-
-Debido a que, la conexión con el lector es a través de bluetooth. Después de la inicialización, el lector y el smartphone deben
-emparejarse, para ello se deberán realizar los siguientes pasos:
-
-Iniciar el escaneo para obtener los lectores compatibles alrededor:
-
-Nota: Este método solicitará una instancia que implemente la interfaz **HALReaderCallback**
-
-```java
-        reader.scan(this, this);
-```
-Una vez iniciado el proceso de escaneo, el sdk notificará a través del método onReaderDetected() los lectores que ha ido encontrado alrededor
-
-```java
-        public void onReaderDetected(String readerName) {
-           // your code goes here
-        }
-```
-Tipicamente, tras haber recibido esta notificación las aplicaciones muestran en alguna lista los lectores detectados para permitir al usuario que elija el lector que va a usar
-
-Una vez que se ha elegido el lector a utilizar, se deberá invocar el método para conectarse al mismo
-
-```java
-    reader.connect(MainActivity.this, this);
-```
-y el sdk notificará a través del método onReaderConnected que la conexión fue exitosa
-
-```java
-    @Override
-    public void onReaderConnected() {
-          // your code goes here
-    }
-```
-
 ## Leer una tarjeta
-
-Para leer una tarjeta se deberá contar con una instancia en estado conectado. Así como, contar con el monto a cobrar.
 
 Paso 1. Configurar un objeto de la clase **TransactionDataRequest**
 
