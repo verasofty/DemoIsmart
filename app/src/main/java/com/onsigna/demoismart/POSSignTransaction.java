@@ -136,16 +136,8 @@ public class POSSignTransaction extends AppCompatActivity implements OnGesturePe
 
     private void settingUpScreen() {
         if (BuildConfig.DEBUG) Log.d(TAG, "== settingUpScreen() ==");
-        if (isLayoutSmallOrNormal()) {
-            if (BuildConfig.DEBUG) Log.d(TAG, "isLayoutSmallOrNormal ? true");
-
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            gestures.setGestureStrokeWidth(3);
-        } else {
-            if (BuildConfig.DEBUG) Log.d(TAG, "isLayoutSmallOrNormal ? false");
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            gestures.setGestureStrokeWidth(5);
-        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        gestures.setGestureStrokeWidth(5);
 
         TextView tv = (TextView) findViewById(R.id.tvAuthorizedAmountResult);
         tv.setText(m_authorizedAmount);

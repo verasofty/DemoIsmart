@@ -51,9 +51,16 @@ Agregar el repositorio donde se encuentra el componente AAR de KashPay, esto deb
 se deberá agregar la referencia en el archivo [build.gradle](/app/build.gradle) de la **aplicación**
 
 ```java
-    implementation 'com.github.verasofty:readercore:v1.0.5'
-    implementation 'com.github.verasofty:ISmartEMVLibrary:v1.0.0'
-    implementation 'com.github.verasofty:ReaderIsmart:v1.0.9'
+    implementation ('com.github.verasofty:ISmartEMVLibrary:v1.0.2')
+        implementation ('com.github.verasofty:readercore:v1.0.9')
+        implementation 'com.github.verasofty:BeansLibAAR:v1.0.0'
+        implementation 'com.github.verasofty:SFUtilsAAR:v1.0.0'
+        implementation 'com.github.verasofty:MobileSFMessagesAAR:v1.0.0'
+        implementation 'com.github.verasofty:WrapperDomainAAR:v1.0.0'
+
+        implementation ('com.github.verasofty:readerismart:v1.0.9'){
+        exclude group : 'com.github.verasofty', module : 'readercore'
+        }
     
 ```
 

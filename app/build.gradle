@@ -29,10 +29,16 @@ android {
 
 dependencies {
 
-    implementation 'com.github.verasofty:readercore:v1.0.5'
-    implementation 'com.github.verasofty:ISmartEMVLibrary:v1.0.0'
-    implementation 'com.github.verasofty:ReaderIsmart:v1.0.9'
-    //implementation files('libs/platform_sdk_v4.0.0802.jar')
+    implementation ('com.github.verasofty:ISmartEMVLibrary:v1.0.2')
+    implementation ('com.github.verasofty:readercore:v1.0.9')
+    implementation 'com.github.verasofty:BeansLibAAR:v1.0.0'
+    implementation 'com.github.verasofty:SFUtilsAAR:v1.0.0'
+    implementation 'com.github.verasofty:MobileSFMessagesAAR:v1.0.0'
+    implementation 'com.github.verasofty:WrapperDomainAAR:v1.0.0'
+
+    implementation ('com.github.verasofty:readerismart:v1.0.9'){
+        exclude group : 'com.github.verasofty', module : 'readercore'
+    }
 
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.appcompat:appcompat:1.4.1'
